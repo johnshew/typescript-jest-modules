@@ -2,7 +2,7 @@
 import { Server } from '../httpServer';
 import { Foo } from '../foo';
 import fetch from 'node-fetch';
-import app, { App, AppConfig } from '../app';
+import { App } from '../app';
 
 jest.mock('../app');
 jest.mock ('../foo');
@@ -42,7 +42,7 @@ describe("Http Server", () => {
         done();
     });
 
-    test("loads app.html", async (done) => {
+    test("test actual web server", async (done) => {
         let response = await fetch('http://localhost:8080');
         expect(response.status).toBe(200);
         expect(response.url).toBe('http://localhost:8080/public/app.html');

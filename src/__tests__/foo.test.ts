@@ -1,9 +1,7 @@
 
 import { Server } from '../httpServer';
 import { Foo } from '../foo';
-import fetch from 'node-fetch';
 import app, { App, AppConfig } from '../app';
-import { nullableTypeAnnotation } from '@babel/types';
 
 jest.mock('../app');
 jest.mock('../httpServer');
@@ -29,7 +27,7 @@ appMocked.mockImplementation((...args: any) => {
 
 describe("Foo", () => {
 
-    test('Check config', async (done) => {
+    test('Mock the app and web server to test Foo', async (done) => {
         let app = new App();
         await app.ready;
         expect(app.foo).toBeDefined();
