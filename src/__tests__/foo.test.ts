@@ -1,4 +1,4 @@
-
+import { mocked } from 'ts-jest';
 import { Server } from '../httpServer';
 import { Foo } from '../foo';
 import app, { App, AppConfig } from '../app';
@@ -6,7 +6,8 @@ import app, { App, AppConfig } from '../app';
 jest.mock('../app');
 jest.mock('../httpServer');
 
-const serverMocked = Server as any as jest.Mock<Server>;
+const serverMockedOpt = mocked(Server,true); //: jest.Mock<Server> = <any> Server;
+const serverMocked : jest.Mock<Server> = <any> Server;
 serverMocked.mockImplementation((...args: any) => {
     return {
         server: null,
@@ -14,7 +15,7 @@ serverMocked.mockImplementation((...args: any) => {
     }
 });
 
-const appMocked = App as any as jest.Mock<App>;
+const appMocked : jest.Mock<App> = <any> App ;
 appMocked.mockImplementation((...args: any) => {
     return {
         ready: Promise.resolve({} as App),
